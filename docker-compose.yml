@@ -1,0 +1,11 @@
+ version: "3.8"
+ services:
+   langchain-app:
+     image: kbservice:latest  # Use the image from the registry
+     container_name: langchain_flask_app
+     ports:
+       - "5602:5602"
+     environment:
+       - INDEX_DIR=/app/chroma_db
+     volumes:
+       - ./chroma_db:/app/chroma_db
