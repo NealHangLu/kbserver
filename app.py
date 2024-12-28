@@ -20,7 +20,6 @@ from langchain.schema.runnable import RunnablePassthrough
 from langchain_community.vectorstores import FAISS
 from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import CharacterTextSplitter, RecursiveCharacterTextSplitter
-from langchain_google_genai import GoogleGenerativeAIEmbeddings
 
 from langchain_community.embeddings import DashScopeEmbeddings
 
