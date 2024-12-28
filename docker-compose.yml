@@ -6,6 +6,6 @@
      ports:
        - "5602:5602"
      environment:
-       - INDEX_DIR=/app/chroma_db
+       - INDEX_DIR=/app/faissdb
      volumes:
-       - ./uploads/caisuxin/chroma_db:/app/chroma_db
+       - ./uploads/caisuxin/faissdb:/app/faissdb
