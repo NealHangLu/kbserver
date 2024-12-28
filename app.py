@@ -5,7 +5,7 @@ from flask import Flask, request, jsonify
 app = Flask(__name__)
 
 # Load environment variables
-INDEX_DIR = os.environ.get("INDEX_DIR", "./chroma_db")  # Default value if not set
+INDEX_DIR = os.environ.get("INDEX_DIR", "./faissdb")  # Default value if not set
 
 DASHSCOPE_API_KEY = "sk-3ca2dc6930dd4b77aaa9bc7675fac7b8"
 if not DASHSCOPE_API_KEY:
@@ -17,7 +17,7 @@ from langchain_community.document_loaders import WebBaseLoader
 from langchain.schema import StrOutputParser
 from langchain.schema.prompt_template import format_document
 from langchain.schema.runnable import RunnablePassthrough
-from langchain_community.vectorstores import Chroma
+from langchain_community.vectorstores import FAISS
 from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import CharacterTextSplitter, RecursiveCharacterTextSplitter
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
@@ -34,18 +34,13 @@ vectorstore_disk = None
 
 def initialize_index():
     global vectorstore_disk
+    index_dir = "./faissdb"
     try:
-        if os.path.exists(INDEX_DIR):
-            vectorstore_disk = Chroma(
-                persist_directory=INDEX_DIR,
-                embedding_function=qwen_embeddings,
-            )
-            print(f"Index loaded from {INDEX_DIR}")
+        if os.path.exists(index_dir):
+            vectorstore_disk = FAISS.load_local(index_dir, qwen_embeddings, allow_dangerous_deserialization=True)
         else:
-            print(
-                "Index directory not found. Creating a new index requires populating it first."
-            )
-            vectorstore_disk = None  # Indicate that the index is not ready
+            print("Index directory not found. Creating a new index requires populating it first.")
+            vectorstore_disk = None # Indicate that the index is not ready
     except Exception as e:
         print(f"Error initializing index: {e}")
         vectorstore_disk = None

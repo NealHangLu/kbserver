@@ -8,4 +8,4 @@
      environment:
        - INDEX_DIR=/app/chroma_db
      volumes:
-       - ./chroma_db:/app/chroma_db
+       - ./uploads/caisuxin/chroma_db:/app/chroma_db
