@@ -78,4 +78,4 @@ def query_index():
 
 if __name__ == "__main__":
     initialize_index()  # Initialize the index before starting the app
-    app.run(host="0.0.0.0", port=5602, debug=False)  # Set debug=False in production
+    app.run(host="0.0.0.0", port=5601, debug=False)  # Set debug=False in production
