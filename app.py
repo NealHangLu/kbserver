@@ -7,7 +7,7 @@ app = Flask(__name__)
 # Load environment variables
 INDEX_DIR = os.environ.get("INDEX_DIR", "./faissdb")  # Default value if not set
 
-DASHSCOPE_API_KEY = "sk-3ca2dc6930dd4b77aaa9bc7675fac7b8"
+DASHSCOPE_API_KEY = "your keys"
 if not DASHSCOPE_API_KEY:
     raise ValueError("DASHSCOPE_API_KEY environment variable not set.")
 
